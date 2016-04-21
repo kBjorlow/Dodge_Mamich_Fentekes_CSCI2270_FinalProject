@@ -5,7 +5,8 @@
 using std::cout;
 using std::string;
 using std::endl;
-MovieTree::MovieTree(std::string filename;)
+using namespace std;
+MovieTree::MovieTree(std::string filename)
 {
     ifstream inFile(filename);
     int counter = 0;
