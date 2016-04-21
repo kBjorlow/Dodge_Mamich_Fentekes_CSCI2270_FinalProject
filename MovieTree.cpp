@@ -281,6 +281,8 @@ void MovieTree::deleteMovieNode(string title)
         cout << "Movie not found." << endl;
         return;
     }
+    deletedNodeArray[indexCount] = *node;
+    indexCount = indexCount +1;
     if(node->leftChild == NULL && node->rightChild == NULL)
     {
         if(node->parent->leftChild == node)
