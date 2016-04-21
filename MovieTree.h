@@ -43,7 +43,7 @@ class MovieTree
         void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
         void countMovieNodes(MovieNode *node, int *c);
         void printMovieInventory(MovieNode * node);
-        MovieNode* search(std::string title);
+        MovieNode* search(std::string title,MovieNode *node);
         MovieNode* treeMinimum(MovieNode *node);
         MovieNode *root = NULL;
         MovieNode deletedNodeArray[50];
