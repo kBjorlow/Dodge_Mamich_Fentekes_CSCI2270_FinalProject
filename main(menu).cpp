@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
                 string title;
                 string Yearr;
                 cout<< "Enter title:" << endl;
-                getline(cin, tite);
+                getline(cin, title);
                 cin.clear();
                 cout << "Enter the year the movie was made:" << endl;
                 getline(cin, Yearr);
