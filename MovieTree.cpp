@@ -424,6 +424,7 @@ void MovieTree::returnMovie(string title, int year)
         else//node found
         {
             node->quantity = node->quantity + 1;
+            return;
         }
     }
     if(node == NULL)
