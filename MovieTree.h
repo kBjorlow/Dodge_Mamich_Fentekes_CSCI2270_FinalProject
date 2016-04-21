@@ -9,6 +9,7 @@ struct MovieNode{
     MovieNode *parent;
     MovieNode *leftChild;
     MovieNode *rightChild;
+    int userRank;
 
     MovieNode(){};
 
@@ -18,6 +19,7 @@ struct MovieNode{
         title = in_title;
         year = in_year;
         quantity = in_quantity;
+        userRank = -1;
     }
 
 };
