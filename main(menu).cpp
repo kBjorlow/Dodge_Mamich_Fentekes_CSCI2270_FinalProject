@@ -90,13 +90,16 @@ int main(int argc, char *argv[])
                 getline(cin,name);
                 cin.ignore();
                 cout << "Enter a ranking from 1 to 10: "<<endl;
-                int rank;
-                getline(cin,rank);
-                if (rank<1 || rank>10){
+                string ranking;
+                int ranki;
+                getline(cin,ranking);
+                stringstream st(ranking);
+                st>>ranki;
+                if (ranki<1 || ranki>10){
                     cout<<"Rank not between 1 and 10"<<endl;
                     break;
                 }
-                myTree.rankMovie(name);
+                myTree.rankMovie(name,ranki);
             }
         case 8:
         {
