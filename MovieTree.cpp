@@ -243,8 +243,8 @@ void MovieTree::countMovieNodes(MovieNode *temp, int *cPtr)
 
 void MovieTree::DeleteAll(MovieNode * node)
 {
+    deletedNodeArray[indexCount] = *node;
     indexCount = indexCount +1;
-    deletedNodeArray[indexCount] = node;
     if(node->leftChild != NULL)
     {
         DeleteAll(node->leftChild);
