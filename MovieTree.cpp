@@ -449,8 +449,36 @@ void MovieTree::returnMovie(string title, int year)
 
 void MovieTree::rankMovie(std::string title,int rank)
 {
-    MovieNode *node=search(title);
-    int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);
-    node->ranks++;
-    node->userRank=ranka;
+    MovieNode *node=search(title,root);
+    if (node!=NULL){
+        int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);
+        node->ranks++;
+        node->userRank=ranka;
+    }
+    else{
+        cout<<"Movie not found."<<endl;
+    }
+}
+
+MovieNode *MovieTree::search(std::string title,MovieNode *node)
+{
+    if (node!=NULL)
+    {
+        if (node->title==title)
+        {
+            return node;
+        }
+        if (title.compare(node->title)<0)
+        {
+            return search(title,node->leftChild);
+        }
+        else
+        {
+            return search(title,node->rightChild);
+        }
+    }
+    else
+    {
+        return NULL;
+    }
 }
