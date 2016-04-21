@@ -8,6 +8,8 @@ using std::endl;
 using namespace std;
 MovieTree::MovieTree(std::string filename)
 {
+    head=NULL;
+    root=NULL;
     ifstream inFile(filename);
     int counter = 0;
     while(inFile)
@@ -480,5 +482,147 @@ MovieNode *MovieTree::search(std::string title,MovieNode *node)
     else
     {
         return NULL;
+    }
+}
+
+void MovieTree::printMoviesByUser()
+{
+    MovieTree::printMoviesByUser(root);
+    linkedList *walker=head;
+    while (walker!=NULL){
+        cout<<"Title: "<<walker->root->title<<"  Ranking: "<<walker->root->userRank<<endl;
+        walker=walker->next;
+    }
+    head=NULL;
+}
+
+void MovieTree::printMoviesByIMDB()
+{
+    MovieTree::printMoviesByIMDB(root);
+    linkedList *walker=head;
+    while (walker!=NULL){
+        cout<<"Title: "<<walker->root->title<<"  Ranking: "<<walker->root->ranking<<endl;
+        walker=walker->next;
+    }
+    head=NULL
+}
+
+void MovieTree::printMoviesByUser(MovieNode *temp)
+{
+    if(temp == NULL)
+    {
+        temp = root;
+    }
+    MovieNode *node = temp;
+    if(node->leftChild != NULL)
+    {
+        printMoviesByUser(node->leftChild);
+    }
+    if (head=NULL){
+        head=new linkedList;
+        head->node=temp;
+        head->next=NULL;
+        head->prev=NULL
+    }
+    else{
+        linkedList *walker=head;
+        bool a=true;
+        while (walker->next!=NULL){
+            if (temp->ranking<walker->node->ranking){
+                if (walker==head){
+                    linkedList *newnode=new linkedList;
+                    newnode->node=temp;
+                    newnode->prev=NULL;
+                    linkedList *temp2=head;
+                    head=newnode;
+                    head->next=temp2;
+                    temp2->prev=head;
+                }
+                else{
+                    linkedList *newnode=new linkedList;
+                    newnode->node=temp;
+                    newnode->prev=walker->prev;
+                    newnode->next=walker;
+                    walker->prev=newnode;
+                    newnode->prev->next=newnode;
+                }
+                break;
+                a=false;
+            }
+            else{
+                walker=walker->next;
+            }
+        }
+        if (a){
+            linkedList *newnode=new linkedList;
+            newnode->node=temp;
+            newnode->next=NULL;
+            newnode->prev=walker;
+            walker->next=newnode;
+        }
+    }
+    if(node->rightChild != NULL)
+    {
+        printMoviesByUser(node->rightChild);
+    }
+}
+
+void MovieTree::printMoviesByIMBD(MovieNode *temp);
+{
+    if(temp == NULL)
+    {
+        temp = root;
+    }
+    MovieNode *node = temp;
+    if(node->leftChild != NULL)
+    {
+        printMoviesByIMDB(node->leftChild);
+    }
+    if (head=NULL){
+        head=new linkedList;
+        head->node=temp;
+        head->next=NULL;
+        head->prev=NULL
+    }
+    else{
+        linkedList *walker=head;
+        bool a=true;
+        while (walker->next!=NULL){
+            if (temp->userRank>walker->node->userRank){
+                if (walker==head){
+                    linkedList *newnode=new linkedList;
+                    newnode->node=temp;
+                    newnode->prev=NULL;
+                    linkedList *temp2=head;
+                    head=newnode;
+                    head->next=temp2;
+                    temp2->prev=head;
+                }
+                else{
+                    linkedList *newnode=new linkedList;
+                    newnode->node=temp;
+                    newnode->prev=walker->prev;
+                    newnode->next=walker;
+                    walker->prev=newnode;
+                    newnode->prev->next=newnode;
+                }
+                break;
+                a=false;
+            }
+            else{
+                walker=walker->next;
+            }
+        }
+        if (a){
+            linkedList *newnode=new linkedList;
+            newnode->node=temp;
+            newnode->next=NULL;
+            newnode->prev=walker;
+            walker->next=newnode;
+        }
+    }
+    if(node->rightChild != NULL)
+    {
+        printMoviesByIMDB(node->rightChild);
     }
 }
