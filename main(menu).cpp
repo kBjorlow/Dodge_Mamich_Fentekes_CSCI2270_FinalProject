@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
         cout << "4. Print the inventory" << endl;
         cout << "5. Delete a movie" << endl;
         cout << "6. Count the movies" << endl;
-        cout << "7. Quit" << endl;
+        cout << "7. Rate a Movie" << endl;
+        cout << "8. Quit" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -82,6 +83,22 @@ int main(int argc, char *argv[])
                 break;
             }
         case 7:
+            {
+                cin.ignore();
+                cout << "Enter movie name: " <<endl;
+                string name;
+                getline(cin,name);
+                cin.ignore();
+                cout << "Enter a ranking from 1 to 10: "<<endl;
+                int rank;
+                getline(cin,rank);
+                if (rank<1 || rank>10){
+                    cout<<"Rank not between 1 and 10"<<endl;
+                    break;
+                }
+                myTree.rankMovie(name);
+            }
+        case 8:
         {
             cout << "Goodbye!" << endl;
             notExit = false;
