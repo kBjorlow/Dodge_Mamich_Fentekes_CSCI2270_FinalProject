@@ -432,7 +432,6 @@ void MovieTree::returnMovie(string title, int year)
     if(node == NULL)
     {
         bool deletedPrev = false;
-        MovieNode *newMovie = new MovieNode;
         for(int i = 0; i <= indexCount; i++)
         {
             if(deletedNodeArray[i].title.compare(title) == 0)
