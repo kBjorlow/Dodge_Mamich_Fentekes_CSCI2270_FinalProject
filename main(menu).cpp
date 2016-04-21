@@ -10,58 +10,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    MovieTree myTree = MovieTree();
     string filename;
     filename = argv[1];
-    ifstream inFile(filename);
-    int counter = 0;
-    while(inFile)
-    {
-        string data;
-        string Ranking;
-        string movieTitle;
-        string Year;
-        string Quant;
-        if(!getline(inFile,data))
-        {
-            break;
-        }
-
-        istringstream ss(data);
-        while(ss)
-        {
-            if(!getline(ss,data,','))
-            {
-                break;
-            }
-            counter++;
-            stringstream ss(data);
-            switch(counter%4)
-            {
-            case 1:
-            {
-                Ranking = data;
-                break;
-            }
-            case 2:
-            {
-                movieTitle = data;
-                break;
-            }
-            case 3:
-            {
-                Year = data;
-                break;
-            }
-            case 0:
-            {
-                Quant = data;
-                myTree.addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()));
-                break;
-            }
-            }
-        }
-    }
+    MovieTree myTree = MovieTree(filename);
     int choice;
     bool notExit = true;
     while(notExit == true)
