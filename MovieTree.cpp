@@ -194,6 +194,8 @@ void MovieTree::countMovieNodes(MovieNode *temp, int *cPtr)
 
 void MovieTree::DeleteAll(MovieNode * node)
 {
+    indexCount = indexCount +1;
+    deletedNodeArray[indexCount] = node;
     if(node->leftChild != NULL)
     {
         DeleteAll(node->leftChild);
@@ -354,4 +356,42 @@ MovieNode* MovieTree::treeMinimum(MovieNode *node)
         node = node->leftChild;
     }
     return node;
+}
+
+void MovieTree::returnMovie(string title, int year)
+{
+    MovieNode *node;
+    node = root;
+    while(node != NULL)
+    {
+        if(node->title.compare(title) > 0)
+        {
+            node = node->leftChild;
+        }
+        else if(node->title.compare(title) <0)
+        {
+            node = node->rightChild;
+        }
+        else//node found
+        {
+            node->quantity = node->quantity + 1;
+        }
+    }
+    if(node == NULL)
+    {
+        bool deletedPrev = false;
+        MovieNode *newMovie = new MovieNode;
+        for(int i = 0; i <= indexCount; i++)
+        {
+            if(deletedNodeArray[i].title.compare(title) == 0)
+            {
+                deletedPrev = true;
+                addMovieNode(deletedNodeArray[i].ranking, deletedNodeArray[i].title, deletedNodeArray[i].year, 1);
+            }
+        }
+        if(deletedPrev == false)
+        {
+            addMovieNode(-1, title, year, 1);
+        }
+    }
 }
