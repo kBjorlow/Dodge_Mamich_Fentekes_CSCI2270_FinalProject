@@ -445,3 +445,11 @@ void MovieTree::returnMovie(string title, int year)
         }
     }
 }
+
+void MovieTree::rankMovie(std::string title,int rank)
+{
+    MovieNode *node=MovieTree::search(name);
+    int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1)
+    node->ranks++;
+    node->userRank=ranka;
+}
