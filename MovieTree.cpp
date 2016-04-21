@@ -51,7 +51,7 @@ MovieTree::MovieTree(std::string filename)
             case 0:
             {
                 Quant = data;
-                myTree.addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()));
+                MovieTree::addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()));
                 break;
             }
             }
@@ -450,8 +450,8 @@ void MovieTree::returnMovie(string title, int year)
 
 void MovieTree::rankMovie(std::string title,int rank)
 {
-    MovieNode *node=MovieTree::search(name);
-    int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1)
+    MovieNode *node=search(title);
+    int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);
     node->ranks++;
     node->userRank=ranka;
 }
