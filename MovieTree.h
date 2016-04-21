@@ -22,9 +22,12 @@ struct MovieNode{
         quantity = in_quantity;
         userRank = -1;
     }
-
 };
-
+struct linkedList{
+    MovieNode *node;
+    MovieNode *next;
+    MovieNode *prev;
+};
 class MovieTree
 {
     public:
@@ -38,6 +41,8 @@ class MovieTree
         void rentMovie(std::string title);
         void returnMovie(std::string title, int year);
         void rankMovie(std::string title,int rank);
+        void printMoviesByUser();
+        void printMoviesByIMBD();
     protected:
     private:
         void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
@@ -45,9 +50,12 @@ class MovieTree
         void printMovieInventory(MovieNode * node);
         MovieNode* search(std::string title,MovieNode *node);
         MovieNode* treeMinimum(MovieNode *node);
-        MovieNode *root = NULL;
+        void printMoviesByUser(MovieNode *temp);
+        void printMoviesByIMBD(MovieNode *temp);
+        MovieNode *root;
         MovieNode deletedNodeArray[50];
         int indexCount = 0;
+        linkedList *head;
 
 };
 
