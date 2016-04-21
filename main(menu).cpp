@@ -69,10 +69,11 @@ int main(int argc, char *argv[])
         cout << "======Main Menu======" << endl;
         cout << "1. Find a movie" << endl;
         cout << "2. Rent a movie" << endl;
-        cout << "3. Print the inventory" << endl;
-        cout << "4. Delete a movie" << endl;
-        cout << "5. Count the movies" << endl;
-        cout << "6. Quit" << endl;
+        cout << "3. Return a movie" << endl;
+        cout << "4. Print the inventory" << endl;
+        cout << "5. Delete a movie" << endl;
+        cout << "6. Count the movies" << endl;
+        cout << "7. Quit" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -97,11 +98,24 @@ int main(int argc, char *argv[])
             break;
         }
         case 3:
+            {
+                cin.ignore(1000, '\n');
+                string title;
+                string Yearr;
+                cout<< "Enter title:" << endl;
+                getline(cin, tite);
+                cin.clear();
+                cout << "Enter the year the movie was made:" << endl;
+                getline(cin, Yearr);
+                cin.clear();
+                myTree.returnMovie(title, atoi(Yearr.c_str()));
+            }
+        case 4:
         {
              myTree.printMovieInventory();
             break;
         }
-        case 4:
+        case 5:
             {
             cin.ignore(1000, '\n');
             string title;
@@ -111,12 +125,12 @@ int main(int argc, char *argv[])
             myTree.deleteMovieNode(title);
             break;
             }
-        case 5:
+        case 6:
             {
                 cout << "Tree contains: " << myTree.countMovieNodes() << " movies." << endl;
                 break;
             }
-        case 6:
+        case 7:
         {
             cout << "Goodbye!" << endl;
             notExit = false;
