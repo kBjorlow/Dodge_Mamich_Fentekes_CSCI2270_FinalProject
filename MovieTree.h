@@ -27,7 +27,7 @@ struct MovieNode{
 class MovieTree
 {
     public:
-        MovieTree();
+        MovieTree(std::string filename);
         ~MovieTree();
         void printMovieInventory();
         int countMovieNodes();
