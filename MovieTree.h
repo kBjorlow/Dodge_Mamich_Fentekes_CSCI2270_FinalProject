@@ -35,6 +35,7 @@ class MovieTree
         void addMovieNode(int ranking, std::string title, int releaseYear, int quantity);
         void findMovie(std::string title);
         void rentMovie(std::string title);
+        void returnMovie(std::string title, int year);
 
     protected:
     private:
@@ -44,6 +45,8 @@ class MovieTree
         MovieNode* search(std::string title);
         MovieNode* treeMinimum(MovieNode *node);
         MovieNode *root = NULL;
+        MovieNode deletedNodeArray[50];
+        int indexCount = 0;
 
 };
 
