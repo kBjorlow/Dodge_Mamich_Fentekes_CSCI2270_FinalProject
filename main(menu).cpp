@@ -88,7 +88,6 @@ int main(int argc, char *argv[])
                 cout << "Enter movie name: " <<endl;
                 string name;
                 getline(cin,name);
-                cin.ignore();
                 cout << "Enter a ranking from 1 to 10: "<<endl;
                 string ranking;
                 int ranki;
