@@ -10,6 +10,7 @@ struct MovieNode{
     MovieNode *leftChild;
     MovieNode *rightChild;
     int userRank;
+    int ranks;
 
     MovieNode(){};
 
@@ -36,7 +37,7 @@ class MovieTree
         void findMovie(std::string title);
         void rentMovie(std::string title);
         void returnMovie(std::string title, int year);
-
+        void rankMovie(std::string title,int rank);
     protected:
     private:
         void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
