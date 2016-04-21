@@ -21,11 +21,13 @@ int main(int argc, char *argv[])
         cout << "1. Find a movie" << endl;
         cout << "2. Rent a movie" << endl;
         cout << "3. Return a movie" << endl;
-        cout << "4. Print the inventory" << endl;
+        cout << "4. Print movies alphabetically" << endl;
         cout << "5. Delete a movie" << endl;
         cout << "6. Count the movies" << endl;
-        cout << "7. Rate a Movie" << endl;
-        cout << "8. Quit" << endl;
+        cout << "7. Rate a movie" << endl;
+        cout << "8. Print movies by user rankings" << endl;
+        cout << "9. Print movies by IMBD rankings" << endl;
+        cout << "10. Quit" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -99,8 +101,19 @@ int main(int argc, char *argv[])
                     break;
                 }
                 myTree.rankMovie(name,ranki);
+                break;
             }
         case 8:
+            {
+                MovieTree::printMoviesByUser();
+                break;
+            }
+        case 9:
+            {
+                MovieTree::printMoviesByIMBD();
+                break;
+            }
+        case 10:
         {
             cout << "Goodbye!" << endl;
             notExit = false;
