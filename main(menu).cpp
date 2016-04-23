@@ -105,12 +105,12 @@ int main(int argc, char *argv[])
             }
         case 8:
             {
-                MovieTree::printMoviesByUser();
+                myTree.printMoviesByUser();
                 break;
             }
         case 9:
             {
-                MovieTree::printMoviesByIMBD();
+                myTree.printMoviesByIMDB();
                 break;
             }
         case 10:
