@@ -22,11 +22,11 @@ int main(int argc, char *argv[])
         cout << "2. Rent a movie" << endl;
         cout << "3. Return a movie" << endl;
         cout << "4. Print movies alphabetically" << endl;
-        cout << "5. Delete a movie" << endl;
-        cout << "6. Count the movies" << endl;
-        cout << "7. Rate a movie" << endl;
-        cout << "8. Print movies by user rankings" << endl;
-        cout << "9. Print movies by IMDb rankings" << endl;
+        cout << "5. Print movies by user rankings" << endl;
+        cout << "6. Print movies by IMDb rankings" << endl;
+        cout << "7. Delete a movie" << endl;
+        cout << "8. Count the movies" << endl;
+        cout << "9. Rate a movie" << endl;
         cout << "10. Quit" << endl;
         cin >> choice;
         switch(choice)
@@ -71,6 +71,16 @@ int main(int argc, char *argv[])
         }
         case 5:
             {
+                myTree.printMoviesByUser();
+                break;
+            }
+        case 6:
+            {
+                myTree.printMoviesByIMDB();
+                break;
+            }
+        case 7:
+            {
             cin.ignore(1000, '\n');
             string title;
             cout << "Enter title:" << endl;
@@ -79,12 +89,12 @@ int main(int argc, char *argv[])
             myTree.deleteMovieNode(title);
             break;
             }
-        case 6:
+        case 8:
             {
                 cout << "Tree contains: " << myTree.countMovieNodes() << " movies." << endl;
                 break;
             }
-        case 7:
+        case 9:
             {
                 cin.ignore();
                 cout << "Enter movie name: " <<endl;
@@ -103,16 +113,7 @@ int main(int argc, char *argv[])
                 myTree.rankMovie(name,ranki);
                 break;
             }
-        case 8:
-            {
-                myTree.printMoviesByUser();
-                break;
-            }
-        case 9:
-            {
-                myTree.printMoviesByIMDB();
-                break;
-            }
+
         case 10:
         {
             cout << "Goodbye!" << endl;
