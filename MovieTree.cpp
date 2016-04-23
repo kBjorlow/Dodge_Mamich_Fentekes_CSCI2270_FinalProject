@@ -2,10 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-using std::cout;
-using std::string;
-using std::endl;
+
 using namespace std;
+
 MovieTree::MovieTree(std::string filename)
 {
     head=NULL;
@@ -490,7 +489,7 @@ void MovieTree::printMoviesByUser()
     MovieTree::printMoviesByUser(root);
     linkedList *walker=head;
     while (walker!=NULL){
-        cout<<"Title: "<<walker->root->title<<"  Ranking: "<<walker->root->userRank<<endl;
+        cout<<"Title: "<<walker->node->title<<"  Ranking: "<<walker->node->userRank<<endl;
         walker=walker->next;
     }
     head=NULL;
@@ -501,10 +500,10 @@ void MovieTree::printMoviesByIMDB()
     MovieTree::printMoviesByIMDB(root);
     linkedList *walker=head;
     while (walker!=NULL){
-        cout<<"Title: "<<walker->root->title<<"  Ranking: "<<walker->root->ranking<<endl;
+        cout<<"Title: "<<walker->node->title<<"  Ranking: "<<walker->node->ranking<<endl;
         walker=walker->next;
     }
-    head=NULL
+    head=NULL;
 }
 
 void MovieTree::printMoviesByUser(MovieNode *temp)
@@ -518,11 +517,11 @@ void MovieTree::printMoviesByUser(MovieNode *temp)
     {
         printMoviesByUser(node->leftChild);
     }
-    if (head=NULL){
+    if (head==NULL){
         head=new linkedList;
         head->node=temp;
         head->next=NULL;
-        head->prev=NULL
+        head->prev=NULL;
     }
     else{
         linkedList *walker=head;
@@ -567,7 +566,7 @@ void MovieTree::printMoviesByUser(MovieNode *temp)
     }
 }
 
-void MovieTree::printMoviesByIMBD(MovieNode *temp);
+void MovieTree::printMoviesByIMDB(MovieNode *temp)
 {
     if(temp == NULL)
     {
@@ -578,11 +577,11 @@ void MovieTree::printMoviesByIMBD(MovieNode *temp);
     {
         printMoviesByIMDB(node->leftChild);
     }
-    if (head=NULL){
+    if (head==NULL){
         head=new linkedList;
         head->node=temp;
         head->next=NULL;
-        head->prev=NULL
+        head->prev=NULL;
     }
     else{
         linkedList *walker=head;
