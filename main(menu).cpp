@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         cout << "6. Count the movies" << endl;
         cout << "7. Rate a movie" << endl;
         cout << "8. Print movies by user rankings" << endl;
-        cout << "9. Print movies by IMBD rankings" << endl;
+        cout << "9. Print movies by IMDb rankings" << endl;
         cout << "10. Quit" << endl;
         cin >> choice;
         switch(choice)
