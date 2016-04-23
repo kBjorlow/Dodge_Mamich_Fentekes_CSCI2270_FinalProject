@@ -99,6 +99,7 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     node->parent = NULL;
     node->leftChild = NULL;
     node->rightChild = NULL;
+    node->userRank=-1;
     if(root == NULL)
     {
         root = node;
@@ -489,7 +490,12 @@ void MovieTree::printMoviesByUser()
     MovieTree::printMoviesByUser(root);
     linkedList *walker=head;
     while (walker!=NULL){
-        cout<<"Title: "<<walker->node->title<<"  Ranking: "<<walker->node->userRank<<endl;
+        if (walker->node->userRank!=-1){
+            cout<<"Title: "<<walker->node->title<<"  Ranking: "<<walker->node->userRank<<endl;
+        }
+        else{
+            cout<<"Title: "<<walker->node->title<<"  Ranking: "<<"N/A"<<endl;
+        }
         walker=walker->next;
     }
     head=NULL;
