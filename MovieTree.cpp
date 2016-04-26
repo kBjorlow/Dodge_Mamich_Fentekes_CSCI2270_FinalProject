@@ -571,3 +571,13 @@ void MovieTree::rentRandomMovie()
     MovieNode *node=allNodes[a];
     rentMovie(node->title);
 }
+
+void MovieTree::recommendMovie(std::string title)
+{
+    recommend=title;
+}
+
+void MovieTree::rentRecommended()
+{
+    rentMovie(recommend);
+}
