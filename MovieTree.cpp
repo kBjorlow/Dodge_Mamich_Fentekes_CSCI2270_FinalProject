@@ -66,11 +66,13 @@ MovieTree::~MovieTree()
 {
     DeleteAll(root);
 }
+
 void MovieTree::printMovieInventory()
 {
     printMovieInventory(root);
     return;
 }
+
 void MovieTree::printMovieInventory(MovieNode* temp)
 {
     if(temp == NULL)
@@ -136,7 +138,6 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     }
 }
 
-
 void MovieTree::findMovie(string title)
 {
     MovieNode *node;
@@ -165,10 +166,8 @@ void MovieTree::findMovie(string title)
     if(node == NULL)
     {
         cout << "Movie not found." << endl;
-
     }
 }
-
 
 void MovieTree::rentMovie(string title)
 {
@@ -186,7 +185,6 @@ void MovieTree::rentMovie(string title)
         }
         else
         {
-            //node->quantity = node->quantity -1;
             if(node->quantity == 0)
             {
                 cout << "Movie out of stock." << endl;
@@ -214,10 +212,7 @@ void MovieTree::rentMovie(string title)
     if(node == NULL)
     {
         cout << "Movie not found." << endl;
-
     }
-
-
 }
 
 int MovieTree::countMovieNodes()
@@ -399,13 +394,8 @@ void MovieTree::deleteMovieNode(string title)
                 node->parent->rightChild = newMovie;
                 newMovie->parent = node->parent;
             }
-
         }
-
-
     }
-
-
 }
 
 MovieNode* MovieTree::treeMinimum(MovieNode *node)
@@ -460,7 +450,6 @@ void MovieTree::returnMovie(string title, int year)
 void MovieTree::rankMovie(std::string title,int rank)
 {
     MovieNode *node=search(title,root);
-    //cout<< "found";
     if (node!=NULL)
     {
         if(node->ranks +1 > 1)
@@ -499,7 +488,6 @@ void MovieTree::rankMovie(std::string title,int rank)
         newNode->next = NULL;
         if(hashTable[ranka - 1] == NULL)
         {
-            //cout<< "Here";
             hashTable[ranka - 1] = newNode;
         }
         else
@@ -554,24 +542,29 @@ void MovieTree::printMoviesByUser()
             temp = hashTable[i];
             while(temp != NULL)
             {
-                cout << temp->node->title << ":" << temp->node->userRank << endl;
+                cout << "Rank: "<<temp->node->userRank<<" Title: "<<temp->node->title << endl;
                 temp = temp->next;
             }
         }
     }
-    if(noElements == true)
+    if(noElements)
     {
         cout << "empty" << endl;
     }
 }
 
-
 void MovieTree::printMoviesByIMDB()
 {
     for(int i = 0; i < endofArray; i++)
     {
-        cout <<"Title: "<< IMDBnodeOrder[i].title <<"  Ranking: "<< IMDBnodeOrder[i].ranking<<endl;
+        cout <<IMDBnodeOrder[i].ranking<<": "<< IMDBnodeOrder[i].title <<endl;
     }
 }
 
-
+void MovieTree::rentRandomMovie()
+{
+    int a=rand() % 50;
+    cout<<a<<endl;
+    MovieNode *node=&IMDBnodeOrder[a];
+    rentMovie(node->title);
+}
