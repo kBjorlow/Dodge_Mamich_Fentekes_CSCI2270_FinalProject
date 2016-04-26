@@ -28,7 +28,9 @@ int main(int argc, char *argv[])
         cout << "8. Count the movies" << endl;
         cout << "9. Rate a movie" << endl;
         cout << "10. Rent a random movie" << endl;
-        cout << "11. Quit" << endl;
+        cout << "11. Recommend a movie" << endl;
+        cout << "12. Rent most recently recommended movie" << endl;
+        cout << "13. Quit" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -120,6 +122,20 @@ int main(int argc, char *argv[])
                 break;
             }
         case 11:
+            {
+                string title;
+                cin.ignore();
+                cout<<"Enter movie title: "<<endl;
+                getline(cin,title);
+                myTree.recommendMovie(title);
+                break;
+            }
+        case 12:
+            {
+                myTree.rentRecommended();
+                break;
+            }
+        case 13:
         {
             cout << "Goodbye!" << endl;
             notExit = false;
