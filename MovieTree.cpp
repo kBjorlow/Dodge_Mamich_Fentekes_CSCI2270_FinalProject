@@ -105,6 +105,8 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     node->rightChild = NULL;
     node->userRank=-1;
     IMDBnodeOrder[counter] = *node;
+    allNodes[numberOfMovies]=node;
+    numberOfMovies++;
     if(root == NULL)
     {
         root = node;
@@ -563,8 +565,8 @@ void MovieTree::printMoviesByIMDB()
 
 void MovieTree::rentRandomMovie()
 {
-    int a=rand() % 50;
+    int a=rand() % numberOfMovies;
     cout<<a<<endl;
-    MovieNode *node=&IMDBnodeOrder[a];
+    MovieNode *node=allNodes[a];
     rentMovie(node->title);
 }
