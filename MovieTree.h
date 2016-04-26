@@ -36,7 +36,7 @@ class MovieTree
         void printMovieInventory();
         int countMovieNodes();
         void deleteMovieNode(std::string title);
-        void addMovieNode(int ranking, std::string title, int releaseYear, int quantity);
+        void addMovieNode(int ranking, std::string title, int releaseYear, int quantity, int index);
         void findMovie(std::string title);
         void rentMovie(std::string title);
         void returnMovie(std::string title, int year);
@@ -56,6 +56,8 @@ class MovieTree
         MovieNode deletedNodeArray[50];
         int indexCount = 0;
         linkedList *head;
+        MovieNode IMDBnodeOrder[100];
+        int endofArray = 50;
 
 };
 
