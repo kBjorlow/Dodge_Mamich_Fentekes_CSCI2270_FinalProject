@@ -362,10 +362,12 @@ void MovieTree::deleteMovieNode(string title)
         {
             Right->parent = node->parent;
             node->leftChild->parent = Right;
-            if(node->parent->leftChild == node){
+            if(node->parent->leftChild == node)
+            {
                 node->parent->leftChild = Right;
             }
-            else{
+            else
+            {
                 node->parent->rightChild = Right;
             }
             delete node;
@@ -387,11 +389,13 @@ void MovieTree::deleteMovieNode(string title)
                 root = newMovie;
                 return;
             }
-            if(node->parent->leftChild == node){
+            if(node->parent->leftChild == node)
+            {
                 node->parent->leftChild = newMovie;
                 newMovie->parent = node->parent;
             }
-            if(node->parent->rightChild == node){
+            if(node->parent->rightChild == node)
+            {
                 node->parent->rightChild = newMovie;
                 newMovie->parent = node->parent;
             }
@@ -456,12 +460,61 @@ void MovieTree::returnMovie(string title, int year)
 void MovieTree::rankMovie(std::string title,int rank)
 {
     MovieNode *node=search(title,root);
-    if (node!=NULL){
+    //cout<< "found";
+    if (node!=NULL)
+    {
+        if(node->ranks +1 > 1)
+        {
+            linkedList *temp = hashTable[node->userRank - 1];
+            while(temp->node->title.compare(title) != 0)
+            {
+                temp = temp->next;
+            }
+            if(temp->next != NULL && temp->prev != NULL)
+            {
+                temp->next->prev = temp->prev;
+                temp->prev->next = temp->next;
+            }
+            if(temp->next == NULL && temp->prev == NULL)
+            {
+                hashTable[temp->node->userRank - 1] = NULL;
+            }
+            if(temp->next == NULL && temp->prev != NULL)
+            {
+                temp->prev->next = NULL;
+            }
+            if(temp->next != NULL && temp->prev == NULL)
+            {
+                temp->next->prev = NULL;
+                hashTable[temp->node->userRank - 1] = temp->next;
+            }
+            delete temp;
+        }
         int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);
         node->ranks++;
         node->userRank=ranka;
+        linkedList *newNode = new linkedList;
+        newNode->node = node;
+        newNode->prev = NULL;
+        newNode->next = NULL;
+        if(hashTable[ranka - 1] == NULL)
+        {
+            //cout<< "Here";
+            hashTable[ranka - 1] = newNode;
+        }
+        else
+        {
+            linkedList *temp = hashTable[ranka - 1];
+            while(temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+            newNode->prev = temp;
+        }
     }
-    else{
+    else
+    {
         cout<<"Movie not found."<<endl;
     }
 }
@@ -491,6 +544,9 @@ MovieNode *MovieTree::search(std::string title,MovieNode *node)
 
 void MovieTree::printMoviesByUser()
 {
+
+}
+/*{
     MovieTree::printMoviesByUser(root);
     linkedList *walker=head;
     while (walker!=NULL){
@@ -504,6 +560,7 @@ void MovieTree::printMoviesByUser()
     }
     head=NULL;
 }
+*/
 
 void MovieTree::printMoviesByIMDB()
 {
@@ -513,7 +570,7 @@ void MovieTree::printMoviesByIMDB()
     }
 }
 
-void MovieTree::printMoviesByUser(MovieNode *temp)
+/*void MovieTree::printMoviesByUser(MovieNode *temp)
 {
     if(temp == NULL)
     {
@@ -572,8 +629,9 @@ void MovieTree::printMoviesByUser(MovieNode *temp)
         printMoviesByUser(node->rightChild);
     }
 }
+*/
 
-void MovieTree::printMoviesByIMDB(MovieNode *temp)
+/*void MovieTree::printMoviesByIMDB(MovieNode *temp)
 {
     if(temp == NULL)
     {
@@ -582,6 +640,7 @@ void MovieTree::printMoviesByIMDB(MovieNode *temp)
     MovieNode *node = temp;
     if(node->leftChild != NULL)
     {
+        node->
         printMoviesByIMDB(node->leftChild);
     }
     if (head==NULL){
@@ -632,4 +691,5 @@ void MovieTree::printMoviesByIMDB(MovieNode *temp)
         printMoviesByIMDB(node->rightChild);
     }
 }
+*/
 
