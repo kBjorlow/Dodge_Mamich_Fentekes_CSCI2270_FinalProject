@@ -61,6 +61,8 @@ class MovieTree
         MovieNode IMDBnodeOrder[100];
         int endofArray = 50;
         linkedList* hashTable[10] = {NULL, NULL, NULL,NULL, NULL,NULL,NULL,NULL,NULL,NULL};
+        MovieNode *allNodes[100];
+        int numberOfMovies=0;
 };
 
 #endif // MOVIETREE_H
