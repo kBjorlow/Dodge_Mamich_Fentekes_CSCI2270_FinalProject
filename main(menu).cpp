@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
             }
         case 8:
             {
-                cout << "Tree contains: " << myTree.countMovieNodes() << " movies." << endl;
+                cout << "Tree contains " << myTree.countMovieNodes() << " movies." << endl;
                 break;
             }
         case 9:
