@@ -22,12 +22,13 @@ int main(int argc, char *argv[])
         cout << "2. Rent a movie" << endl;
         cout << "3. Return a movie" << endl;
         cout << "4. Print movies alphabetically" << endl;
-        cout << "5. Print movies by user rankings" << endl;
+        cout << "5. Print movies ranked by user" << endl;
         cout << "6. Print movies by IMDb rankings" << endl;
         cout << "7. Delete a movie" << endl;
         cout << "8. Count the movies" << endl;
         cout << "9. Rate a movie" << endl;
-        cout << "10. Quit" << endl;
+        cout << "10. Rent a random movie" << endl;
+        cout << "11. Quit" << endl;
         cin >> choice;
         switch(choice)
         {
@@ -113,14 +114,22 @@ int main(int argc, char *argv[])
                 myTree.rankMovie(name,ranki);
                 break;
             }
-
         case 10:
+            {
+                myTree.rentRandomMovie();
+                break;
+            }
+        case 11:
         {
             cout << "Goodbye!" << endl;
             notExit = false;
             break;
         }
+        default:
+            {
+                cout<<"Not a valid entry, try again"<<endl;
+                break;
+            }
         }
     }
-
 }
