@@ -10,7 +10,7 @@ struct MovieNode{
     MovieNode *leftChild;
     MovieNode *rightChild;
     int userRank;
-    int ranks;
+    int ranks = 0;
 
     MovieNode(){};
 
@@ -28,6 +28,7 @@ struct linkedList{
     linkedList *next;
     linkedList *prev;
 };
+
 class MovieTree
 {
     public:
@@ -58,6 +59,7 @@ class MovieTree
         linkedList *head;
         MovieNode IMDBnodeOrder[100];
         int endofArray = 50;
+        linkedList* hashTable[10] = {NULL, NULL, NULL,NULL, NULL,NULL,NULL,NULL,NULL,NULL};
 
 };
 
