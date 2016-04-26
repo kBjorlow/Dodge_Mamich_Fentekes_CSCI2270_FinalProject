@@ -398,6 +398,7 @@ void MovieTree::deleteMovieNode(string title)
             }
         }
     }
+    numberOfMovies--;
 }
 
 MovieNode* MovieTree::treeMinimum(MovieNode *node)
