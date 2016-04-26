@@ -7,6 +7,7 @@ using namespace std;
 
 MovieTree::MovieTree(std::string filename)
 {
+    int index = 0;
     head=NULL;
     root=NULL;
     ifstream inFile(filename);
@@ -52,7 +53,8 @@ MovieTree::MovieTree(std::string filename)
             case 0:
             {
                 Quant = data;
-                MovieTree::addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()));
+                MovieTree::addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()), index);
+                index = index +1;
                 break;
             }
             }
@@ -87,7 +89,7 @@ void MovieTree::printMovieInventory(MovieNode* temp)
     }
 }
 
-void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int quantity)
+void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int quantity, int counter)
 {
     MovieNode *temp = new MovieNode;
     MovieNode *Parent = new MovieNode;
@@ -100,6 +102,7 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     node->leftChild = NULL;
     node->rightChild = NULL;
     node->userRank=-1;
+    IMDBnodeOrder[counter] = *node;
     if(root == NULL)
     {
         root = node;
@@ -439,12 +442,13 @@ void MovieTree::returnMovie(string title, int year)
             if(deletedNodeArray[i].title.compare(title) == 0)
             {
                 deletedPrev = true;
-                addMovieNode(deletedNodeArray[i].ranking, deletedNodeArray[i].title, deletedNodeArray[i].year, 1);
+                addMovieNode(deletedNodeArray[i].ranking, deletedNodeArray[i].title, deletedNodeArray[i].year, 1, deletedNodeArray[i].ranking);
             }
         }
         if(deletedPrev == false)
         {
-            addMovieNode(-1, title, year, 1);
+            addMovieNode(-1, title, year, 1, endofArray);
+            endofArray = endofArray +1;
         }
     }
 }
@@ -503,13 +507,10 @@ void MovieTree::printMoviesByUser()
 
 void MovieTree::printMoviesByIMDB()
 {
-    MovieTree::printMoviesByIMDB(root);
-    linkedList *walker=head;
-    while (walker!=NULL){
-        cout<<"Title: "<<walker->node->title<<"  Ranking: "<<walker->node->ranking<<endl;
-        walker=walker->next;
+    for(int i = 0; i < endofArray; i++)
+    {
+        cout <<"Title: "<< IMDBnodeOrder[i].title <<"  Ranking: "<< IMDBnodeOrder[i].ranking<<endl;
     }
-    head=NULL;
 }
 
 void MovieTree::printMoviesByUser(MovieNode *temp)
@@ -631,3 +632,4 @@ void MovieTree::printMoviesByIMDB(MovieNode *temp)
         printMoviesByIMDB(node->rightChild);
     }
 }
+
