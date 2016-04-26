@@ -44,6 +44,7 @@ class MovieTree
         void rankMovie(std::string title,int rank);
         void printMoviesByUser();
         void printMoviesByIMDB();
+        void rentRandomMovie();
     protected:
     private:
         void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
@@ -60,7 +61,6 @@ class MovieTree
         MovieNode IMDBnodeOrder[100];
         int endofArray = 50;
         linkedList* hashTable[10] = {NULL, NULL, NULL,NULL, NULL,NULL,NULL,NULL,NULL,NULL};
-
 };
 
 #endif // MOVIETREE_H
