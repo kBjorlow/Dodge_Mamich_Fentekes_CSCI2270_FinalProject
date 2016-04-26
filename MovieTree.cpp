@@ -544,7 +544,25 @@ MovieNode *MovieTree::search(std::string title,MovieNode *node)
 
 void MovieTree::printMoviesByUser()
 {
-
+    linkedList *temp = new linkedList;
+    bool noElements = true;
+    for(int i = 9; i >= 0; i--)
+    {
+        if(hashTable[i] != NULL)
+        {
+            noElements = false;
+            temp = hashTable[i];
+            while(temp != NULL)
+            {
+                cout << temp->node->title << ":" << temp->node->userRank << endl;
+                temp = temp->next;
+            }
+        }
+    }
+    if(noElements == true)
+    {
+        cout << "empty" << endl;
+    }
 }
 /*{
     MovieTree::printMoviesByUser(root);
