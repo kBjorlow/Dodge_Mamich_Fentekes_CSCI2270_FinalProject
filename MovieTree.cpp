@@ -10,6 +10,7 @@ MovieTree::MovieTree(std::string filename)
     int index = 0;
     head=NULL;
     root=NULL;
+    recommend="";
     ifstream inFile(filename);
     int counter = 0;
     while(inFile)
@@ -579,7 +580,12 @@ void MovieTree::recommendMovie(std::string title)
 
 void MovieTree::rentRecommended()
 {
-    rentMovie(recommend);
+    if (recommend!=""){
+        rentMovie(recommend);
+    }
+    else{
+        cout<<"No Movie Recommended."<<endl;
+    }
 }
 void MovieTree::printMoviesByYear(int yr){
     printMoviesByYear(yr,root);
