@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
         cout << "12. Rent most recently recommended movie" << endl;
         cout << "13. Find movies by year" << endl;
         cout << "14. Find oldest movie" << endl;
-        cout << "15. Fine newest movie" << endl;
+        cout << "15. Find newest movie" << endl;
         cout << "16. Quit" << endl;
         cin >> choice;
         switch(choice)
