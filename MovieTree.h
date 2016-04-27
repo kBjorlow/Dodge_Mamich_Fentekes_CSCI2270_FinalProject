@@ -47,6 +47,9 @@ class MovieTree
         void rentRandomMovie();
         void recommendMovie(std::string title);
         void rentRecommended();
+        void printMoviesByYear(int yr);
+        void findOldestMovie();
+        void findNewestMovie();
     protected:
     private:
         void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
@@ -56,6 +59,7 @@ class MovieTree
         MovieNode* treeMinimum(MovieNode *node);
         void printMoviesByUser(MovieNode *temp);
         void printMoviesByIMDB(MovieNode *temp);
+        void printMoviesByYear(int yr, MovieNode *temp);
         MovieNode *root;
         MovieNode deletedNodeArray[50];
         int indexCount = 0;
@@ -66,6 +70,10 @@ class MovieTree
         MovieNode *allNodes[100];
         int numberOfMovies=0;
         std::string recommend;
+        MovieNode *oldest = NULL;
+        void findOldestMovie(MovieNode *temp);
+        void findNewestMovie(MovieNode *temp);
+        MovieNode *newest = NULL;
 };
 
 #endif // MOVIETREE_H

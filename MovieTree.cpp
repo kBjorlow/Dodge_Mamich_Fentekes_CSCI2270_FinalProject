@@ -581,3 +581,78 @@ void MovieTree::rentRecommended()
 {
     rentMovie(recommend);
 }
+void MovieTree::printMoviesByYear(int yr){
+    printMoviesByYear(yr,root);
+
+}
+void MovieTree::printMoviesByYear(int yr, MovieNode *temp){
+  if(temp == NULL)
+  {
+      temp = root;
+  }
+  MovieNode *node = temp;
+  if(node->leftChild != NULL)
+  {
+      printMoviesByYear(yr,node->leftChild);
+  }
+  if(node->year==yr){
+      cout<< "Movie: " << node->title << " " << node->year << endl;
+  }
+
+  if(node->rightChild != NULL)
+  {
+      printMoviesByYear(yr,node->rightChild);
+  }
+}
+void MovieTree::findOldestMovie(){
+  findOldestMovie(root);
+  cout<<"Oldest Movie: "<<oldest->title<<" "<<oldest->year<<endl;
+}
+void MovieTree::findOldestMovie(MovieNode *temp){
+  if(temp == NULL)
+  {
+      temp = root;
+  }
+  MovieNode *node = temp;
+  if(node->leftChild != NULL)
+  {
+      findOldestMovie(node->leftChild);
+  }
+  if(oldest==NULL){
+      oldest = node;
+  }
+  if(node->year < oldest->year && oldest!=NULL){
+      oldest=node;
+  }
+
+  if(node->rightChild != NULL)
+  {
+      findOldestMovie(node->rightChild);
+  }
+}
+void MovieTree::findNewestMovie(){
+  findNewestMovie(root);
+  cout<<"Newest Movie: "<<newest->title<<" "<<newest->year<<endl;
+}
+void MovieTree::findNewestMovie(MovieNode *temp){
+  if(temp == NULL)
+  {
+      temp = root;
+  }
+  MovieNode *node = temp;
+  if(node->leftChild != NULL)
+  {
+      findNewestMovie(node->leftChild);
+  }
+  if(newest==NULL){
+      newest=node;
+  }
+  if(node->year > newest->year && newest!=NULL){
+      newest=node;
+  }
+
+  if(node->rightChild != NULL)
+  {
+      findNewestMovie(node->rightChild);
+  }
+}
