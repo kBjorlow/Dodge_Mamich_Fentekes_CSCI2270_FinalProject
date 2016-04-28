@@ -516,19 +516,19 @@ void MovieTree::rankMovie(std::string title,int rank)//lets the user rank a func
     }
 }
 
-MovieNode *MovieTree::search(std::string title,MovieNode *node)
+MovieNode *MovieTree::search(std::string title,MovieNode *node)//searches for a node
 {
-    if (node!=NULL)
+    if (node!=NULL)//if no node
     {
-        if (node->title==title)
+        if (node->title==title)//correct node
         {
             return node;
         }
-        if (title.compare(node->title)<0)
+        if (title.compare(node->title)<0)//go left
         {
             return search(title,node->leftChild);
         }
-        else
+        else//go right
         {
             return search(title,node->rightChild);
         }
@@ -539,13 +539,13 @@ MovieNode *MovieTree::search(std::string title,MovieNode *node)
     }
 }
 
-void MovieTree::printMoviesByUser()
+void MovieTree::printMoviesByUser()//prints movies ranked by user
 {
-    linkedList *temp = new linkedList;
+    linkedList *temp = new linkedList;//initialization
     bool noElements = true;
     for(int i = 9; i >= 0; i--)
     {
-        if(hashTable[i] != NULL)
+        if(hashTable[i] != NULL)//if element in hash table
         {
             noElements = false;
             temp = hashTable[i];
@@ -562,7 +562,7 @@ void MovieTree::printMoviesByUser()
     }
 }
 
-void MovieTree::printMoviesByIMDB()
+void MovieTree::printMoviesByIMDB()//print movies based on IMDb rankings
 {
     for(int i = 0; i < endofArray; i++)
     {
@@ -570,20 +570,20 @@ void MovieTree::printMoviesByIMDB()
     }
 }
 
-void MovieTree::rentRandomMovie()
+void MovieTree::rentRandomMovie()//rents a random movie from the tree
 {
-    int a=rand() % numberOfMovies;
-    cout<<a<<endl;
+    int a=rand() % numberOfMovies;//finds random number from 1 to number of movies
+    //cout<<a<<endl;
     MovieNode *node=allNodes[a];
-    rentMovie(node->title);
+    rentMovie(node->title);//rents movie
 }
 
-void MovieTree::recommendMovie(std::string title)
+void MovieTree::recommendMovie(std::string title)//function to reccomend movie
 {
     recommend=title;
 }
 
-void MovieTree::rentRecommended()
+void MovieTree::rentRecommended()//rents most recently recommended movie
 {
     if (recommend!=""){
         rentMovie(recommend);
@@ -592,77 +592,77 @@ void MovieTree::rentRecommended()
         cout<<"No Movie Recommended."<<endl;
     }
 }
-void MovieTree::printMoviesByYear(int yr){
+void MovieTree::printMoviesByYear(int yr){//calls private function
     printMoviesByYear(yr,root);
 
 }
-void MovieTree::printMoviesByYear(int yr, MovieNode *temp){
+void MovieTree::printMoviesByYear(int yr, MovieNode *temp){//prints movies made in a inputed year
   if(temp == NULL)
   {
       temp = root;
   }
   MovieNode *node = temp;
-  if(node->leftChild != NULL)
+  if(node->leftChild != NULL)//go left
   {
       printMoviesByYear(yr,node->leftChild);
   }
-  if(node->year==yr){
+  if(node->year==yr){//print node
       cout<< "Movie: " << node->title << " " << node->year << endl;
   }
 
-  if(node->rightChild != NULL)
+  if(node->rightChild != NULL)//print node
   {
       printMoviesByYear(yr,node->rightChild);
   }
 }
-void MovieTree::findOldestMovie(){
+void MovieTree::findOldestMovie(){//calls private function to find oldest movie in tree
   findOldestMovie(root);
   cout<<"Oldest Movie: "<<oldest->title<<" "<<oldest->year<<endl;
 }
-void MovieTree::findOldestMovie(MovieNode *temp){
+void MovieTree::findOldestMovie(MovieNode *temp){//finds oldest movie in tree
   if(temp == NULL)
   {
       temp = root;
   }
   MovieNode *node = temp;
-  if(node->leftChild != NULL)
+  if(node->leftChild != NULL)//go left
   {
       findOldestMovie(node->leftChild);
   }
   if(oldest==NULL){
       oldest = node;
   }
-  if(node->year < oldest->year && oldest!=NULL){
+  if(node->year < oldest->year && oldest!=NULL){//if oldest
       oldest=node;
   }
 
-  if(node->rightChild != NULL)
+  if(node->rightChild != NULL)//go right
   {
       findOldestMovie(node->rightChild);
   }
 }
-void MovieTree::findNewestMovie(){
+void MovieTree::findNewestMovie(){//calls private function to fund newest movie
   findNewestMovie(root);
   cout<<"Newest Movie: "<<newest->title<<" "<<newest->year<<endl;
 }
-void MovieTree::findNewestMovie(MovieNode *temp){
+void MovieTree::findNewestMovie(MovieNode *temp){//finds newest movie
   if(temp == NULL)
   {
       temp = root;
   }
   MovieNode *node = temp;
-  if(node->leftChild != NULL)
+  if(node->leftChild != NULL)//go left
   {
       findNewestMovie(node->leftChild);
   }
   if(newest==NULL){
       newest=node;
   }
-  if(node->year > newest->year && newest!=NULL){
+  if(node->year > newest->year && newest!=NULL){//if newest
       newest=node;
   }
 
-  if(node->rightChild != NULL)
+  if(node->rightChild != NULL)//go right
   {
       findNewestMovie(node->rightChild);
   }
