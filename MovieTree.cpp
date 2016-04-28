@@ -1,3 +1,9 @@
+/*
+Adam Dodge, Rachel Mamich, and Nick Fentekes
+Final Project
+Main Function
+*/
+
 #include "MovieTree.h"
 #include <iostream>
 #include <fstream>
@@ -5,32 +11,31 @@
 
 using namespace std;
 
-MovieTree::MovieTree(std::string filename)
+MovieTree::MovieTree(std::string filename)//constructor to create tree
 {
     int index = 0;
     head=NULL;
     root=NULL;
-    recommend="";
-    ifstream inFile(filename);
+    recommend="";//intitialization
+    ifstream inFile(filename);//opens file
     int counter = 0;
     while(inFile)
     {
-        string data;
+        string data;//strings for creating node
         string Ranking;
         string movieTitle;
         string Year;
         string Quant;
-        if(!getline(inFile,data))
+        if(!getline(inFile,data))//if no data
         {
             break;
         }
-
-        istringstream ss(data);
+        istringstream ss(data);//creates stringstream to split data
         while(ss)
         {
-            if(!getline(ss,data,','))
+            if(!getline(ss,data,','))//if no data
             {
-                break;
+                break;//exit while loop
             }
             counter++;
             stringstream ss(data);
@@ -54,7 +59,7 @@ MovieTree::MovieTree(std::string filename)
             case 0:
             {
                 Quant = data;
-                MovieTree::addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()), index);
+                MovieTree::addMovieNode(atoi(Ranking.c_str()), movieTitle, atoi(Year.c_str()), atoi(Quant.c_str()), index);//adds node
                 index = index +1;
                 break;
             }
@@ -63,18 +68,18 @@ MovieTree::MovieTree(std::string filename)
     }
 }
 
-MovieTree::~MovieTree()
+MovieTree::~MovieTree()//destructor deletes all nodes in tree
 {
     DeleteAll(root);
 }
 
-void MovieTree::printMovieInventory()
+void MovieTree::printMovieInventory()//calls private function with root
 {
     printMovieInventory(root);
     return;
 }
 
-void MovieTree::printMovieInventory(MovieNode* temp)
+void MovieTree::printMovieInventory(MovieNode* temp)//private function to print all nodes alphabetically
 {
     if(temp == NULL)
     {
@@ -83,21 +88,21 @@ void MovieTree::printMovieInventory(MovieNode* temp)
     MovieNode *node = temp;
     if(node->leftChild != NULL)
     {
-        printMovieInventory(node->leftChild);
+        printMovieInventory(node->leftChild);//calls function for left child
     }
-    cout<< "Movie: " << node->title << " " << node->quantity << endl;
+    cout<< "Movie: " << node->title << " " << node->quantity << endl;//prints
     if(node->rightChild != NULL)
     {
-        printMovieInventory(node->rightChild);
+        printMovieInventory(node->rightChild);//calls function for right child
     }
 }
 
-void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int quantity, int counter)
+void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int quantity, int counter)//adds movie node to tree
 {
     MovieNode *temp = new MovieNode;
     MovieNode *Parent = new MovieNode;
-    MovieNode *node = new MovieNode;
-    node->ranking = ranking;
+    MovieNode *node = new MovieNode;//initialization of node
+    node->ranking = ranking;//initialization of node properties
     node->title = title;
     node->year = releaseYear;
     node->quantity = quantity;
@@ -105,14 +110,14 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     node->leftChild = NULL;
     node->rightChild = NULL;
     node->userRank=-1;
-    IMDBnodeOrder[counter] = *node;
-    allNodes[numberOfMovies]=node;
+    IMDBnodeOrder[counter] = *node;//for printing by IMDb
+    allNodes[numberOfMovies]=node;//for random movies function
     numberOfMovies++;
     if(root == NULL)
     {
         root = node;
     }
-    else
+    else//finds place for node
     {
         temp = root;
         Parent = root;
@@ -141,23 +146,23 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
     }
 }
 
-void MovieTree::findMovie(string title)
+void MovieTree::findMovie(string title)//finds movie in tree
 {
-    MovieNode *node;
+    MovieNode *node;//initialization
     node = root;
     while(node != NULL)
     {
-        if(node->title.compare(title) > 0)
+        if(node->title.compare(title) > 0)//go left
         {
             node = node->leftChild;
         }
-        else if(node->title.compare(title) <0)
+        else if(node->title.compare(title) <0)//go right
         {
             node = node->rightChild;
         }
         else
         {
-            cout << "Movie Info:" << endl;
+            cout << "Movie Info:" << endl;//print statements
             cout << "===========" << endl;
             cout << "Ranking:" << node->ranking << endl;
             cout << "Title:" << node->title << endl;
@@ -172,38 +177,38 @@ void MovieTree::findMovie(string title)
     }
 }
 
-void MovieTree::rentMovie(string title)
+void MovieTree::rentMovie(string title)//rents movie from tree
 {
     MovieNode *node;
     node = root;
-    while(node != NULL)
+    while(node != NULL)//finds node
     {
-        if(node->title.compare(title) > 0)
+        if(node->title.compare(title) > 0)//go left
         {
             node = node->leftChild;
         }
-        else if(node->title.compare(title) <0)
+        else if(node->title.compare(title) <0)//go right
         {
             node = node->rightChild;
         }
         else
         {
-            if(node->quantity == 0)
+            if(node->quantity == 0)//if no more movies left
             {
                 cout << "Movie out of stock." << endl;
                 return;
             }
-            if(node->quantity > 0)
+            if(node->quantity > 0)//rent movie
             {
-                node->quantity = node->quantity- 1;
-                cout << "Movie has been rented." << endl;
+                node->quantity = node->quantity- 1;//stock decreases
+                cout << "Movie has been rented." << endl;//print info
                 cout << "Movie Info:" << endl;
                 cout << "===========" << endl;
                 cout << "Ranking:" << node->ranking << endl;
                 cout << "Title:" << node->title << endl;
                 cout << "Year:" << node->year << endl;
                 cout << "Quantity:" << node->quantity << endl;
-                if(node->quantity == 0)
+                if(node->quantity == 0)//if there is only one, delete the node from the tree
                 {
                     deleteMovieNode(node->title);
                     return;
@@ -218,7 +223,7 @@ void MovieTree::rentMovie(string title)
     }
 }
 
-int MovieTree::countMovieNodes()
+int MovieTree::countMovieNodes()//counts the number of movies in the tree- calls private function
 {
     int *cPtr = new int;
     *cPtr = 0;
@@ -226,51 +231,51 @@ int MovieTree::countMovieNodes()
     return *cPtr;
 }
 
-void MovieTree::countMovieNodes(MovieNode *temp, int *cPtr)
+void MovieTree::countMovieNodes(MovieNode *temp, int *cPtr)//private function for counting nodes in a tree
 {
     if(temp == NULL)
     {
         temp = root;
     }
     MovieNode *node = temp;
-    if(node->leftChild != NULL)
+    if(node->leftChild != NULL)//go left
     {
         countMovieNodes(node->leftChild, cPtr);
     }
     *cPtr = *cPtr +1;
-    if(node->rightChild != NULL)
+    if(node->rightChild != NULL)//go right
     {
         countMovieNodes(node->rightChild, cPtr);
     }
 }
 
-void MovieTree::DeleteAll(MovieNode * node)
+void MovieTree::DeleteAll(MovieNode * node)//deletes all movies in the tree
 {
     deletedNodeArray[indexCount] = *node;
     indexCount = indexCount +1;
-    if(node->leftChild != NULL)
+    if(node->leftChild != NULL)//all nodes to left
     {
         DeleteAll(node->leftChild);
     }
-    if(node->rightChild != NULL)
+    if(node->rightChild != NULL)//all nodes to right
     {
         DeleteAll(node->rightChild);
     }
     cout << "Deleting: " << node->title <<endl;
-    delete node;
+    delete node;//delete
 }
 
-void MovieTree::deleteMovieNode(string title)
+void MovieTree::deleteMovieNode(string title)//delete one node in the tree
 {
     MovieNode *node;
     node = root;
-    while(node != NULL)
+    while(node != NULL)//finds node
     {
-        if(node->title.compare(title) > 0)
+        if(node->title.compare(title) > 0)//go left
         {
             node = node->leftChild;
         }
-        else if(node->title.compare(title) <0)
+        else if(node->title.compare(title) <0)//go right
         {
             node = node->rightChild;
         }
@@ -284,33 +289,33 @@ void MovieTree::deleteMovieNode(string title)
         cout << "Movie not found." << endl;
         return;
     }
-    deletedNodeArray[indexCount] = *node;
+    deletedNodeArray[indexCount] = *node;//the deleted node array is so that if a movie is returned and it has been deleted, it can be re-added with all of its previous information
     indexCount = indexCount +1;
-    if(node->leftChild == NULL && node->rightChild == NULL)
+    if(node->leftChild == NULL && node->rightChild == NULL)//no children
     {
-        if(node->parent->leftChild == node)
+        if(node->parent->leftChild == node)//if it is left child
         {
             node->parent->leftChild = NULL;
             delete node;
             return;
         }
-        else
+        else//right child
         {
             node->parent->rightChild = NULL;
             delete node;
             return;
         }
     }
-    else if(node->leftChild != NULL && node->rightChild == NULL)
+    else if(node->leftChild != NULL && node->rightChild == NULL)//only left child
     {
         MovieNode *x = new MovieNode;
         x = node->leftChild;
-        if(node->parent->leftChild == node)
+        if(node->parent->leftChild == node)//if leftchild
         {
             node->parent->leftChild = x;
             x->parent = node->parent;
         }
-        else
+        else//if rightchild
         {
             node->parent->rightChild = x;
             x->parent = node->parent;
@@ -318,16 +323,16 @@ void MovieTree::deleteMovieNode(string title)
         delete node;
         return;
     }
-    else if(node->rightChild != NULL && node->leftChild == NULL)
+    else if(node->rightChild != NULL && node->leftChild == NULL)//only rightchild
     {
         MovieNode *x = new MovieNode;
         x = node->rightChild;
-        if(node->parent->leftChild == node)
+        if(node->parent->leftChild == node)//if leftchild
         {
             node->parent->leftChild = x;
             x->parent = node->parent;
         }
-        else
+        else//if rightchild
         {
             node->parent->rightChild = x;
             x->parent = node->parent;
@@ -335,19 +340,19 @@ void MovieTree::deleteMovieNode(string title)
         delete node;
         return;
     }
-    else if(node->rightChild != NULL && node->leftChild != NULL)
+    else if(node->rightChild != NULL && node->leftChild != NULL)//two children
     {
         MovieNode *newMovie = new MovieNode;
         MovieNode *Right = new MovieNode;
         Right = node->rightChild;
-        newMovie = treeMinimum(node->rightChild);
-        if(newMovie == Right)
+        newMovie = treeMinimum(node->rightChild);//finds minimum value in tree
+        if(newMovie == Right)//if movie is the one to the right
         {
-            if(node->parent->leftChild == node)
+            if(node->parent->leftChild == node)//if leftchild
             {
                 node->parent->leftChild = newMovie;
             }
-            else
+            else//if rightchild
             {
                 node->parent->rightChild = newMovie;
             }
@@ -356,15 +361,15 @@ void MovieTree::deleteMovieNode(string title)
             delete node;
             return;
         }
-        if(newMovie == NULL)
+        if(newMovie == NULL)//no right child
         {
             Right->parent = node->parent;
             node->leftChild->parent = Right;
-            if(node->parent->leftChild == node)
+            if(node->parent->leftChild == node)//if leftchild
             {
                 node->parent->leftChild = Right;
             }
-            else
+            else//if rightchild
             {
                 node->parent->rightChild = Right;
             }
@@ -372,13 +377,13 @@ void MovieTree::deleteMovieNode(string title)
         }
         else
         {
-            if(newMovie->rightChild != NULL)
+            if(newMovie->rightChild != NULL)//if there is a right child
             {
                 newMovie->rightChild->parent = newMovie->parent;
                 newMovie->parent->leftChild = newMovie->rightChild;
             }
             node->leftChild->parent = newMovie;
-            if(node->parent == NULL)
+            if(node->parent == NULL)//if no parent
             {
                 newMovie->leftChild = root->leftChild;
                 newMovie->rightChild = root->rightChild;
@@ -387,12 +392,12 @@ void MovieTree::deleteMovieNode(string title)
                 root = newMovie;
                 return;
             }
-            if(node->parent->leftChild == node)
+            if(node->parent->leftChild == node)//if leftchild
             {
                 node->parent->leftChild = newMovie;
                 newMovie->parent = node->parent;
             }
-            if(node->parent->rightChild == node)
+            if(node->parent->rightChild == node)//if rightchild
             {
                 node->parent->rightChild = newMovie;
                 newMovie->parent = node->parent;
@@ -402,27 +407,27 @@ void MovieTree::deleteMovieNode(string title)
     numberOfMovies--;
 }
 
-MovieNode* MovieTree::treeMinimum(MovieNode *node)
+MovieNode* MovieTree::treeMinimum(MovieNode *node)//finds node with minimum value for title in the tree
 {
     //passing in right child of node being deleted
     if(node->leftChild != NULL)
     {
-        node = node->leftChild;
+        node = node->leftChild//go all the way left
     }
     return node;
 }
 
-void MovieTree::returnMovie(string title, int year)
+void MovieTree::returnMovie(string title, int year)//returns a movie and adds it to the inventory
 {
     MovieNode *node;
     node = root;
-    while(node != NULL)
+    while(node != NULL)//finds node
     {
-        if(node->title.compare(title) > 0)
+        if(node->title.compare(title) > 0)//go left
         {
             node = node->leftChild;
         }
-        else if(node->title.compare(title) <0)
+        else if(node->title.compare(title) <0)//go right
         {
             node = node->rightChild;
         }
@@ -432,18 +437,18 @@ void MovieTree::returnMovie(string title, int year)
             return;
         }
     }
-    if(node == NULL)
+    if(node == NULL)//if movie not in inventory
     {
         bool deletedPrev = false;
         for(int i = 0; i <= indexCount; i++)
         {
-            if(deletedNodeArray[i].title.compare(title) == 0)
+            if(deletedNodeArray[i].title.compare(title) == 0)//looks to see if it is in the deleted node array
             {
                 deletedPrev = true;
                 addMovieNode(deletedNodeArray[i].ranking, deletedNodeArray[i].title, deletedNodeArray[i].year, 1, deletedNodeArray[i].ranking);
             }
         }
-        if(deletedPrev == false)
+        if(deletedPrev == false)//if not, adds new node
         {
             addMovieNode(-1, title, year, 1, endofArray);
             endofArray = endofArray +1;
@@ -451,50 +456,50 @@ void MovieTree::returnMovie(string title, int year)
     }
 }
 
-void MovieTree::rankMovie(std::string title,int rank)
+void MovieTree::rankMovie(std::string title,int rank)//lets the user rank a function
 {
-    MovieNode *node=search(title,root);
-    if (node!=NULL)
+    MovieNode *node=search(title,root);//finds node
+    if (node!=NULL)//if node exists
     {
-        if(node->ranks +1 > 1)
+        if(node->ranks +1 > 1)//if it has been ranked before
         {
             linkedList *temp = hashTable[node->userRank - 1];
-            while(temp->node->title.compare(title) != 0)
+            while(temp->node->title.compare(title) != 0)//while it is not the correct node
             {
                 temp = temp->next;
             }
-            if(temp->next != NULL && temp->prev != NULL)
+            if(temp->next != NULL && temp->prev != NULL)//if there is next and previous
             {
                 temp->next->prev = temp->prev;
                 temp->prev->next = temp->next;
             }
-            if(temp->next == NULL && temp->prev == NULL)
+            if(temp->next == NULL && temp->prev == NULL)//if no next nor previous
             {
                 hashTable[temp->node->userRank - 1] = NULL;
             }
-            if(temp->next == NULL && temp->prev != NULL)
+            if(temp->next == NULL && temp->prev != NULL)//only previous
             {
                 temp->prev->next = NULL;
             }
-            if(temp->next != NULL && temp->prev == NULL)
+            if(temp->next != NULL && temp->prev == NULL)//only next
             {
                 temp->next->prev = NULL;
                 hashTable[temp->node->userRank - 1] = temp->next;
             }
             delete temp;
         }
-        int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);
+        int ranka=((node->ranks*node->userRank)+rank)/(node->ranks+1);//finds average of all rankings
         node->ranks++;
         node->userRank=ranka;
-        linkedList *newNode = new linkedList;
+        linkedList *newNode = new linkedList;//initializes for linked list
         newNode->node = node;
         newNode->prev = NULL;
         newNode->next = NULL;
         if(hashTable[ranka - 1] == NULL)
         {
-            hashTable[ranka - 1] = newNode;
+            hashTable[ranka - 1] = newNode;//add to hashTable if no node is there
         }
-        else
+        else//otherwise add to linked list on hashTable
         {
             linkedList *temp = hashTable[ranka - 1];
             while(temp->next != NULL)
@@ -505,7 +510,7 @@ void MovieTree::rankMovie(std::string title,int rank)
             newNode->prev = temp;
         }
     }
-    else
+    else//no movie
     {
         cout<<"Movie not found."<<endl;
     }
