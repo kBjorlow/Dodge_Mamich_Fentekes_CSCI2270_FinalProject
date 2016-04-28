@@ -11,6 +11,12 @@ How to Run:
 4. Run "main.cpp" with the argument "Assignment6Movies.txt"  
 5. Choose an option from the menu  
 
+How to Run:
+1. Open terminal inside the VM.
+2. Type "git clone https://github.com/addo6677/Dodge_Mamich_Fentekes_CSCI2270_FinalProject.git"
+3. Navigate to the project directory by entering "cd /home/user/Dodge_Mamich_Fentekes_CSCI2270_FinalProject/" using the correct location of the project.
+4. Compile the project by entering "g++ MovieTree.h MovieTree.cpp main.cpp -o main -std=c++11"
+5. Run the project by entering "./main Movies.txt", replacing "Movies.txt" with the name of the desired input file of movies.
 
 Dependencies:  
 The input to the main function is Assignment6Movies.txt.
