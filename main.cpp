@@ -1,3 +1,9 @@
+/*
+Adam Dodge, Rachel Mamich, and Nick Fentekes
+Final Project
+Main Function
+*/
+
 #include "MovieTree.h"
 #include <iostream>
 #include <fstream>
@@ -10,12 +16,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    string filename;
-    filename = argv[1];
+    string filename;//initialization
+    filename = argv[1];//gets filename from input
     MovieTree myTree = MovieTree(filename);
     int choice;
     bool notExit = true;
-    while(notExit == true)
+    while(notExit == true)//menu
     {
         cout << "======Main Menu======" << endl;
         cout << "1. Find a movie" << endl;
