@@ -1,3 +1,9 @@
+/*
+Adam Dodge, Rachel Mamich, and Nick Fentekes
+Final Project
+Class Function
+*/
+
 #ifndef MOVIETREE_H
 #define MOVIETREE_H
 #include <iostream>
