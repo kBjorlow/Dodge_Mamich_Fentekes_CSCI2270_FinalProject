@@ -1,7 +1,7 @@
 /*
 Adam Dodge, Rachel Mamich, and Nick Fentekes
 Final Project
-Main Function
+Driver Function
 */
 
 #include "MovieTree.h"
