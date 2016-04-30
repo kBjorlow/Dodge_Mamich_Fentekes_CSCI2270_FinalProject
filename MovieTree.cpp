@@ -412,7 +412,7 @@ MovieNode* MovieTree::treeMinimum(MovieNode *node)//finds node with minimum valu
     //passing in right child of node being deleted
     if(node->leftChild != NULL)
     {
-        node = node->leftChild//go all the way left
+        node = node->leftChild;//go all the way left
     }
     return node;
 }
