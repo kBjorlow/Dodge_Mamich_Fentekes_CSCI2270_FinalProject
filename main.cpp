@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     string filename;//initialization
     filename = argv[1];//gets filename from input
     MovieTree myTree = MovieTree(filename);
-    int choice;
+    string choice;
     bool notExit = true;
     while(notExit == true)//menu
     {
@@ -40,32 +40,28 @@ int main(int argc, char *argv[])
         cout << "14. Find oldest movie" << endl;
         cout << "15. Find newest movie" << endl;
         cout << "16. Quit" << endl;
-        cin >> choice;
-        switch(choice)
-        {
-        case 1:
+        getline(cin,choice);
+        if (choice=="1")
             {
-            cin.ignore(1000, '\n');
+            //cin.ignore(1000, '\n');
             string Title;
             cout << "Enter title:" << endl;
             getline(cin, Title);
             cin.clear();
             myTree.findMovie(Title);
-            break;
         }
-        case 2:
+        else if (choice=="2")
         {
-            cin.ignore(1000, '\n');
+            //cin.ignore(1000, '\n');
             string title;
             cout << "Enter title:" << endl;
             getline(cin, title);
             cin.clear();
             myTree.rentMovie(title);
-            break;
         }
-        case 3:
+        else if (choice=="3")
             {
-                cin.ignore(1000, '\n');
+                //cin.ignore(1000, '\n');
                 string title;
                 string Yearr;
                 cout<< "Enter title:" << endl;
@@ -76,39 +72,34 @@ int main(int argc, char *argv[])
                 cin.clear();
                 myTree.returnMovie(title, atoi(Yearr.c_str()));
             }
-        case 4:
+        else if (choice=="4")
         {
              myTree.printMovieInventory();
-            break;
         }
-        case 5:
+        else if (choice=="5")
             {
                 myTree.printMoviesByUser();
-                break;
             }
-        case 6:
+        else if (choice=="6")
             {
                 myTree.printMoviesByIMDB();
-                break;
             }
-        case 7:
+        else if (choice=="7")
             {
-            cin.ignore(1000, '\n');
+            //cin.ignore(1000, '\n');
             string title;
             cout << "Enter title:" << endl;
             getline(cin, title);
             cin.clear();
             myTree.deleteMovieNode(title);
-            break;
             }
-        case 8:
+        else if (choice=="8")
             {
                 cout << "Tree contains " << myTree.countMovieNodes() << " movies." << endl;
-                break;
             }
-        case 9:
+        else if (choice=="9")
             {
-                cin.ignore();
+                //cin.ignore();
                 cout << "Enter movie name: " <<endl;
                 string name;
                 getline(cin,name);
@@ -120,60 +111,52 @@ int main(int argc, char *argv[])
                 st>>ranki;
                 if (ranki<1 || ranki>10){
                     cout<<"Rank not between 1 and 10"<<endl;
-                    break;
                 }
-                myTree.rankMovie(name,ranki);
-                break;
+                else{
+                    myTree.rankMovie(name,ranki);
+                }
             }
-        case 10:
+        else if (choice=="10")
             {
                 myTree.rentRandomMovie();
-                break;
             }
-        case 11:
+        else if (choice=="11")
             {
                 string title;
-                cin.ignore();
+                //cin.ignore();
                 cout<<"Enter movie title: "<<endl;
                 getline(cin,title);
                 myTree.recommendMovie(title);
-                break;
             }
-        case 12:
+        else if (choice=="12")
             {
                 myTree.rentRecommended();
-                break;
             }
-        case 13:
+        else if (choice=="13")
         {
             string y;
-            cin.ignore();
+            //cin.ignore();
             cout<<"Enter movie year: "<<endl;
             getline(cin,y);
             myTree.printMoviesByYear(atoi(y.c_str()));
-            break;
         }
-        case 14:
+        else if (choice=="14")
         {
             myTree.findOldestMovie();
-            break;
         }
-        case 15:
+        else if (choice=="15")
         {
             myTree.findNewestMovie();
-            break;
         }
-        case 16:
+        else if (choice=="16")
         {
             cout << "Goodbye!" << endl;
             notExit = false;
-            break;
         }
-        default:
+        else
             {
                 cout<<"Not a valid entry, try again"<<endl;
-                break;
             }
-        }
+
     }
 }
