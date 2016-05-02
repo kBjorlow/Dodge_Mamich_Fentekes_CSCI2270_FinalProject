@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
             {
             //cin.ignore(1000, '\n');
             string Title;
-            cout << "Enter title:" << endl;
+            cout << "Enter title: " << endl;
             getline(cin, Title);
             cin.clear();
             myTree.findMovie(Title);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         {
             //cin.ignore(1000, '\n');
             string title;
-            cout << "Enter title:" << endl;
+            cout << "Enter title: " << endl;
             getline(cin, title);
             cin.clear();
             myTree.rentMovie(title);
@@ -64,10 +64,10 @@ int main(int argc, char *argv[])
                 //cin.ignore(1000, '\n');
                 string title;
                 string Yearr;
-                cout<< "Enter title:" << endl;
+                cout<< "Enter title: " << endl;
                 getline(cin, title);
                 cin.clear();
-                cout << "Enter the year the movie was made:" << endl;
+                cout << "Enter the year the movie was made: " << endl;
                 getline(cin, Yearr);
                 cin.clear();
                 myTree.returnMovie(title, atoi(Yearr.c_str()));
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
             {
             //cin.ignore(1000, '\n');
             string title;
-            cout << "Enter title:" << endl;
+            cout << "Enter title: " << endl;
             getline(cin, title);
             cin.clear();
             myTree.deleteMovieNode(title);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
                 stringstream st(ranking);
                 st>>ranki;
                 if (ranki<1 || ranki>10){
-                    cout<<"Rank not between 1 and 10"<<endl;
+                    cout<<"Rank is not between 1 and 10. "<<endl;
                 }
                 else{
                     myTree.rankMovie(name,ranki);
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
         }
         else
             {
-                cout<<"Not a valid entry, try again"<<endl;
+                cout<<"Not a valid entry, please try again."<<endl;
             }
 
     }
